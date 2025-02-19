@@ -36,6 +36,7 @@ void UInputInteractionComponent::BindActions(UEnhancedInputComponent* InputCompo
 	if (IsValid(InputComponent))
 	{
 		InputComponent->BindAction(LeaveAction, ETriggerEvent::Triggered, this, &UInputInteractionComponent::Leave);
+		OnBindActions.Broadcast(InputComponent);
 		bIsBound = true;
 	}
 }

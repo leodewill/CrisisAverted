@@ -9,6 +9,7 @@
 #include "CrisisAverted/CrisisAvertedPlayerController.h"
 #include "InputInteractionComponent.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FInputBindingEvent, UEnhancedInputComponent*, InputComponent);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FInputInteractionEvent, APawn*, OtherPawn, APlayerController*, OtherController);
 
 
@@ -22,6 +23,8 @@ public:
 
 	void Interact(APawn* Pawn);
 
+	UPROPERTY()
+	FInputBindingEvent OnBindActions;
 
 	UPROPERTY(BlueprintAssignable)
 	FInputInteractionEvent OnInteract;
@@ -47,6 +50,6 @@ protected:
 
 	/** Leave Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
-	class UInputAction* LeaveAction;
+	UInputAction* LeaveAction;
 
 };
