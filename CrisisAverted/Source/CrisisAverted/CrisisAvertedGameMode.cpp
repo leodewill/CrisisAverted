@@ -12,3 +12,12 @@ ACrisisAvertedGameMode::ACrisisAvertedGameMode()
 	DefaultPawnClass = PlayerPawnClassFinder.Class;
 
 }
+
+void ACrisisAvertedGameMode::StartMinigame(EMinigameType MinigameID)
+{
+	if (MinigameList.Contains(MinigameID))
+	{
+		ActiveMinigame = GetWorld()->SpawnActor<AMinigame>(MinigameList[MinigameID]);
+		ActiveMinigame->StartMinigame();
+	}
+}
