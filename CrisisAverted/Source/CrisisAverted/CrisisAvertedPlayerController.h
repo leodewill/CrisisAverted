@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
+#include "EnhancedInputSubsystems.h"
 #include "CrisisAvertedPlayerController.generated.h"
 
 class UInputMappingContext;
@@ -16,16 +17,22 @@ class CRISISAVERTED_API ACrisisAvertedPlayerController : public APlayerControlle
 {
 	GENERATED_BODY()
 	
+public:
+	void SetCustomInput(UInputMappingContext* CustomInput);
+
+	void ResetInput();
+
 protected:
+	virtual void BeginPlay() override;
+
+	void SetInputMapping(UInputMappingContext* InInputMapping);
 
 	/** Input Mapping Context to be used for player input */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
-	UInputMappingContext* InputMappingContext;
+	UInputMappingContext* DefaultInputMapping;
 
-	// Begin Actor interface
-protected:
+	UEnhancedInputLocalPlayerSubsystem* EnhancedInput;
 
-	virtual void BeginPlay() override;
-
-	// End Actor interface
+private:
+	UInputMappingContext* InputMapping = nullptr;
 };

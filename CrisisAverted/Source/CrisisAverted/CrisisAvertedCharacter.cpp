@@ -10,6 +10,7 @@
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
 #include "Engine/LocalPlayer.h"
+#include "Interaction/Interactable.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -60,6 +61,9 @@ void ACrisisAvertedCharacter::SetupPlayerInputComponent(UInputComponent* PlayerI
 
 		// Looking
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ACrisisAvertedCharacter::Look);
+
+		// Interacting
+		EnhancedInputComponent->BindAction(InteractAction, ETriggerEvent::Triggered, this, &ACrisisAvertedCharacter::Interact);
 	}
 	else
 	{
@@ -91,5 +95,14 @@ void ACrisisAvertedCharacter::Look(const FInputActionValue& Value)
 		// add yaw and pitch input to controller
 		AddControllerYawInput(LookAxisVector.X);
 		AddControllerPitchInput(LookAxisVector.Y);
+	}
+}
+
+void ACrisisAvertedCharacter::Interact(const FInputActionValue& Value)
+{
+
+	if (IInteractable* Interactable = Cast<IInteractable>(InteractionTarget))
+	{
+		Interactable->Interact(this);
 	}
 }

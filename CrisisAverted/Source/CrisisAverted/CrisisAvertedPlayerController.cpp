@@ -5,14 +5,30 @@
 #include "EnhancedInputSubsystems.h"
 #include "Engine/LocalPlayer.h"
 
+void ACrisisAvertedPlayerController::SetCustomInput(UInputMappingContext* CustomInput)
+{
+	SetInputMapping(CustomInput);
+}
+
+void ACrisisAvertedPlayerController::ResetInput()
+{
+	SetInputMapping(DefaultInputMapping);
+}
+
 void ACrisisAvertedPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// get the enhanced input subsystem
-	if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer()))
+	EnhancedInput = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer());
+	ResetInput();
+}
+
+void ACrisisAvertedPlayerController::SetInputMapping(UInputMappingContext* InInputMapping)
+{
+	if (IsValid(EnhancedInput) && !EnhancedInput->HasMappingContext(InInputMapping))
 	{
-		// add the mapping context so we get controls
-		Subsystem->AddMappingContext(InputMappingContext, 0);
+		EnhancedInput->RemoveMappingContext(InputMapping);
+		EnhancedInput->AddMappingContext(InInputMapping, 0);
+		InputMapping = InInputMapping;
 	}
 }
