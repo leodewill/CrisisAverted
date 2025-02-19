@@ -9,7 +9,7 @@
 #include "CrisisAverted/CrisisAvertedPlayerController.h"
 #include "InputInteractionComponent.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FInputInteractionEvent, APawn*, Pawn);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FInputInteractionEvent, APawn*, OtherPawn, APlayerController*, OtherController);
 
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
@@ -26,11 +26,16 @@ public:
 	UPROPERTY(BlueprintAssignable)
 	FInputInteractionEvent OnInteract;
 
+	UPROPERTY(BlueprintAssignable)
+	FInputInteractionEvent OnLeave;
+
 protected:
 	void BindActions(UEnhancedInputComponent* InputComponent);
 
 	UFUNCTION()
 	void Leave();
+
+	APawn* PlayerPawn;
 
 	ACrisisAvertedPlayerController* PlayerController;
 

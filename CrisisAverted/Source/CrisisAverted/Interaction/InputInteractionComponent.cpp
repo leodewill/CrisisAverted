@@ -20,13 +20,14 @@ void UInputInteractionComponent::Interact(APawn* Pawn)
 
 	if (PlayerController = Cast<ACrisisAvertedPlayerController>(Pawn->GetController()); IsValid(PlayerController))
 	{
+		PlayerPawn = Pawn;
 		PlayerController->SetCustomInput(InputMapping);
 		if (!bIsBound)
 		{
 			BindActions(Cast<UEnhancedInputComponent>(PlayerController->InputComponent));
 		}
 
-		OnInteract.Broadcast(Pawn);
+		OnInteract.Broadcast(PlayerPawn, PlayerController);
 	}
 }
 
@@ -44,6 +45,7 @@ void UInputInteractionComponent::Leave()
 	if (IsValid(PlayerController))
 	{
 		PlayerController->ResetInput();
+		OnLeave.Broadcast(PlayerPawn, PlayerController);
 	}
 }
 
