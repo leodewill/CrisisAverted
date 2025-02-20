@@ -8,6 +8,7 @@ AMinigame::AMinigame()
 	PrimaryActorTick.bCanEverTick = false;
 	bShouldUpdate = true;
 
+	MinigameID = EMinigameType::None;
 	ElapsedTime = 0.f;
 }
 

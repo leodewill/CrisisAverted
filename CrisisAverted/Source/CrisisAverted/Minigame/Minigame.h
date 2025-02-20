@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "CrisisAverted/Progression/ProgressionImportantTypes.h"
 #include "Minigame.generated.h"
 
 constexpr float MINIGAME_UPDATE_FREQ = 0.1f;
@@ -21,6 +22,8 @@ public:
 
 	void StartMinigame();
 
+	EMinigameType GetID() { return MinigameID; }
+
 protected:
 	UFUNCTION()
 	void UpdateMinigame();
@@ -32,6 +35,8 @@ protected:
 	virtual void Start() {}
 
 	virtual void Update() {}
+
+	EMinigameType MinigameID;
 
 	FTimerHandle MinigameTimer;
 

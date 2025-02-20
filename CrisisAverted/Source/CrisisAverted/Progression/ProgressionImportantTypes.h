@@ -6,5 +6,6 @@
 UENUM(BlueprintType)
 enum class EMinigameType : uint8
 {
+    None UMETA(DisplayName = "None"),
     ReactorBase UMETA(DisplayName = "Reactor")
 };

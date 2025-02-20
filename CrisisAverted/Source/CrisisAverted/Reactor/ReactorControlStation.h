@@ -6,6 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "Components/BoxComponent.h"
 #include "CrisisAverted/Interaction/Interactable.h"
+#include "CrisisAverted/Minigame/MinigameComponent.h"
 #include "CrisisAverted/Interaction/InputInteractionComponent.h"
 #include "Camera/CameraComponent.h"
 #include "ReactorControlStation.generated.h"
@@ -22,6 +23,9 @@ public:
 	virtual void Interact(APawn* Pawn) override;
 
 protected:
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	UMinigameComponent* MinigameComponent;
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	UInputInteractionComponent* InteractionComponent;
 };

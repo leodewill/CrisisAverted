@@ -23,6 +23,12 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void StartMinigame(TSubclassOf<AMinigame> MinigameClass);
 
+	AMinigame* GetActiveMinigame() const { return ActiveMinigame; }
+
+	AMinigame* GetActiveMinigameWithID(EMinigameType MinigameID) const { return (IsValid(ActiveMinigame) && ActiveMinigame->GetID() == MinigameID) ? ActiveMinigame : nullptr; }
+
+	FMinigameSyncEvent OnStartMinigame;
+
 protected:
 	AMinigame* ActiveMinigame;
 };

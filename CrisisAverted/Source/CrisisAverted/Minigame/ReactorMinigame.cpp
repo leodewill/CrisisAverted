@@ -6,6 +6,8 @@
 AReactorMinigame::AReactorMinigame()
 {
 	PrimaryActorTick.bCanEverTick = false;
+
+	MinigameID = EMinigameType::ReactorBase;
 }
 
 void AReactorMinigame::Start()

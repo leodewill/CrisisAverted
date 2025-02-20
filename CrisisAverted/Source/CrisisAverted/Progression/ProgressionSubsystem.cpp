@@ -10,4 +10,6 @@ UProgressionSubsystem::UProgressionSubsystem()
 void UProgressionSubsystem::StartMinigame(TSubclassOf<AMinigame> MinigameClass)
 {
 	ActiveMinigame = GetWorld()->SpawnActor<AMinigame>(MinigameClass);
+	ActiveMinigame->StartMinigame();
+	OnStartMinigame.Broadcast(ActiveMinigame);
 }
