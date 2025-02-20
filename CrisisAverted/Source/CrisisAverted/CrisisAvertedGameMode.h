@@ -4,8 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
-#include "Progression/ProgressionImportantTypes.h"
-#include "Progression/ProgressionSubsystem.h"
 #include "CrisisAvertedGameMode.generated.h"
 
 UCLASS(minimalapi)

@@ -25,7 +25,7 @@ public:
 
 	AMinigame* GetActiveMinigame() const { return ActiveMinigame; }
 
-	AMinigame* GetActiveMinigameWithID(EMinigameType MinigameID) const { return (IsValid(ActiveMinigame) && ActiveMinigame->GetID() == MinigameID) ? ActiveMinigame : nullptr; }
+	AMinigame* GetActiveMinigameWithTag(FGameplayTag Tag) const { return (IsValid(ActiveMinigame) && ActiveMinigame->MinigameTag.MatchesTag(Tag)) ? ActiveMinigame : nullptr; }
 
 	FMinigameSyncEvent OnStartMinigame;
 

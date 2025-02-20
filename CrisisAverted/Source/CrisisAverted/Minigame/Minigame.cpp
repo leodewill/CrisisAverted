@@ -6,25 +6,43 @@
 AMinigame::AMinigame()
 {
 	PrimaryActorTick.bCanEverTick = false;
-	bShouldUpdate = true;
 
-	MinigameID = EMinigameType::None;
 	ElapsedTime = 0.f;
+}
+
+void AMinigame::RegisterBlock(UMinigameBlock* Block)
+{
+	if (IsValid(Block))
+	{
+		MinigameBlocks.Add(Block);
+	}
 }
 
 void AMinigame::StartMinigame()
 {
-	if (bShouldUpdate)
+	for (UMinigameBlock* Block : MinigameBlocks)
 	{
-		GetWorld()->GetTimerManager().SetTimer(MinigameTimer, this, &AMinigame::UpdateMinigame, MINIGAME_UPDATE_FREQ, true);
+		Block->Start();
 	}
 
+	GetWorld()->GetTimerManager().SetTimer(MinigameTimer, this, &AMinigame::UpdateMinigame, MINIGAME_UPDATE_FREQ, true);
 	ElapsedTime = 0.f;
-	Start();
+	OnStart();
 }
 
 void AMinigame::UpdateMinigame()
 {
+	for (UMinigameBlock* Block : MinigameBlocks)
+	{
+		Block->Update(MINIGAME_UPDATE_FREQ);
+	}
+
 	ElapsedTime += MINIGAME_UPDATE_FREQ;
-	Update();
+	OnUpdate();
+
+	if (Duration > 0.f && ElapsedTime >= Duration)
+	{
+		GetWorld()->GetTimerManager().ClearTimer(MinigameTimer);
+		OnExpired();
+	}
 }

@@ -6,7 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "Components/BoxComponent.h"
 #include "CrisisAverted/Interaction/Interactable.h"
-#include "CrisisAverted/Minigame/MinigameComponent.h"
+#include "CrisisAverted/Minigame/MinigameListenerComponent.h"
 #include "CrisisAverted/Interaction/InputInteractionComponent.h"
 #include "Camera/CameraComponent.h"
 #include "ReactorControlStation.generated.h"
@@ -24,7 +24,7 @@ public:
 
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-	UMinigameComponent* MinigameComponent;
+	UMinigameListenerComponent* MinigameListener;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	UInputInteractionComponent* InteractionComponent;

@@ -3,7 +3,6 @@
 
 #include "ReactorControlStation.h"
 #include "CrisisAverted/Progression/ProgressionSubsystem.h"
-#include "CrisisAverted/Minigame/ReactorMinigame.h"
 
 // Sets default values
 AReactorControlStation::AReactorControlStation()
@@ -11,7 +10,7 @@ AReactorControlStation::AReactorControlStation()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 
-	MinigameComponent = CreateDefaultSubobject<UMinigameComponent>(TEXT("MinigameComponent"));
+	MinigameListener = CreateDefaultSubobject<UMinigameListenerComponent>(TEXT("MinigameListener"));
 	InteractionComponent = CreateDefaultSubobject<UInputInteractionComponent>(TEXT("Interaction"));
 }
 

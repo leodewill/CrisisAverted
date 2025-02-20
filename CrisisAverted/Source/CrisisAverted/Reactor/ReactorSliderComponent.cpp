@@ -24,7 +24,6 @@ void UReactorSliderComponent::Update()
 	{
 		InputPercent += InputDirection * InputSpeed * REACTOR_UPDATE_FREQ;
 		InputPercent = FMath::Clamp(InputPercent, 0.f, 1.f);
-		UE_LOG(LogTemp, Log, TEXT("Input %.2f"), InputPercent)
 		OnInputChanged.Broadcast(InputPercent, OldPercent);
 	}
 
@@ -40,7 +39,6 @@ void UReactorSliderComponent::Update()
 		OutputPercent = FMath::Clamp(OutputPercent, InputPercent, 1.f);
 	}
 
-	UE_LOG(LogTemp, Log, TEXT("Output %.2f"), OutputPercent)
 	OnOutputChanged.Broadcast(OutputPercent, OldPercent);
 	if (FMath::IsNearlyEqual(InputPercent, OutputPercent))
 	{
