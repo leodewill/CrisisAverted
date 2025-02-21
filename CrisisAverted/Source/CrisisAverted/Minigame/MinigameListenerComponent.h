@@ -9,6 +9,7 @@
 #include "MinigameListenerComponent.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FMinigameListenerEvent, AMinigame*, Minigame);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FMinigameEndListenerEvent, EMinigameEndReason, Reason);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class CRISISAVERTED_API UMinigameListenerComponent : public UActorComponent
@@ -22,6 +23,9 @@ public:
 	UPROPERTY(BlueprintAssignable)
 	FMinigameListenerEvent OnEnterMinigame;
 
+	UPROPERTY(BlueprintAssignable)
+	FMinigameEndListenerEvent OnExitMinigame;
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
@@ -32,5 +36,7 @@ protected:
 private:
 	UFUNCTION()
 	void OnAnyMinigameStarted(AMinigame* Minigame);
-		
+	
+	UFUNCTION()
+	void OnMinigameEnded(EMinigameEndReason Reason);
 };

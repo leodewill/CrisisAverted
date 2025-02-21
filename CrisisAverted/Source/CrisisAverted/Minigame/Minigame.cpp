@@ -37,3 +37,10 @@ void AMinigame::UpdateMinigame()
 
 	OnUpdate();
 }
+
+void AMinigame::EndMinigame(EMinigameEndReason Reason)
+{
+	GetWorld()->GetTimerManager().ClearTimer(MinigameTimer);
+	OnEnd(Reason);
+	OnMinigameEnd.Broadcast(Reason);
+}

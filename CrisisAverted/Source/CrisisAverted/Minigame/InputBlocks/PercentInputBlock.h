@@ -17,7 +17,7 @@ public:
 	UPercentInputBlock();
 
 	UFUNCTION(BlueprintCallable)
-	virtual void ResetPercent(float InValue);
+	void Setup(float InValue);
 
 	UFUNCTION(BlueprintCallable)
 	virtual void SetPercent(float NewPercent);

@@ -8,7 +8,8 @@ UUnstableOutputBlock::UUnstableOutputBlock()
 	PrimaryComponentTick.bCanEverTick = false;
 	TargetPercent = 0.5;
 	Tolerance = 0.1;
-	GracePeriod = 10.f;
+	RecoverySpeed = 1.f;
+	FailThreshold = 10.f;
 
 	Status = EUnstableMinigameStatus::Good;
 	Percent = TargetPercent;
@@ -16,9 +17,10 @@ UUnstableOutputBlock::UUnstableOutputBlock()
 	bFailed = false;
 }
 
-void UUnstableOutputBlock::ResetPercent(float InValue)
+void UUnstableOutputBlock::Setup(float InPercent, float InThreshold)
 {
-	TargetPercent = InValue;
+	TargetPercent = InPercent;
+	FailThreshold = InThreshold;
 	Percent = TargetPercent;
 	Status = EUnstableMinigameStatus::Good;
 }
@@ -31,13 +33,30 @@ void UUnstableOutputBlock::Start()
 
 void UUnstableOutputBlock::Update(float DeltaSeconds)
 {
-	if (!bFailed && Status != EUnstableMinigameStatus::Good)
+	if (bFailed)
+	{
+		return;
+	}
+
+	if (Status != EUnstableMinigameStatus::Good)
 	{
 		UnstableTime += DeltaSeconds;
-		if (UnstableTime >= GracePeriod)
+		if (UnstableTime >= FailThreshold)
 		{
+			UnstableTime = FailThreshold;
+			OnTimeChanged.Broadcast(UnstableTime, FailThreshold);
 			Fail();
 		}
+		else
+		{
+			OnTimeChanged.Broadcast(UnstableTime, FailThreshold);
+		}
+	}
+	else if (UnstableTime > 0.f)
+	{
+		UnstableTime -= DeltaSeconds * RecoverySpeed;
+		UnstableTime = FMath::Max(UnstableTime, 0.f);
+		OnTimeChanged.Broadcast(UnstableTime, FailThreshold);
 	}
 }
 
@@ -57,12 +76,6 @@ void UUnstableOutputBlock::Process()
 {
 	EUnstableMinigameStatus OldStatus = Status;
 	Status = (Percent < TargetPercent - Tolerance) ? EUnstableMinigameStatus::Low : ((Percent > TargetPercent + Tolerance) ? EUnstableMinigameStatus::High : EUnstableMinigameStatus::Good);
-
-	if (Status != EUnstableMinigameStatus::Good && Status != OldStatus)
-	{
-		UnstableTime = 0.f;
-	}
-
 	OnChanged.Broadcast(Percent, Status, TargetPercent);
 }
 

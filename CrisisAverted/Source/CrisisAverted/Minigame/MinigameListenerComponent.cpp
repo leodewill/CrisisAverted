@@ -36,6 +36,12 @@ void UMinigameListenerComponent::OnAnyMinigameStarted(AMinigame* Minigame)
 {
 	if (IsValid(Minigame) && Minigame->MinigameTag.MatchesTag(MinigameTag))
 	{
+		Minigame->OnMinigameEnd.AddUniqueDynamic(this, &UMinigameListenerComponent::OnMinigameEnded);
 		OnEnterMinigame.Broadcast(Minigame);
 	}
+}
+
+void UMinigameListenerComponent::OnMinigameEnded(EMinigameEndReason Reason)
+{
+	OnExitMinigame.Broadcast(Reason);
 }

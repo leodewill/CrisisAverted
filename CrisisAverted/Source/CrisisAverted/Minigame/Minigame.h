@@ -9,6 +9,8 @@
 #include "MinigameImportantTypes.h"
 #include "Minigame.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FMinigameEndEvent, EMinigameEndReason, Reason);
+
 constexpr float MINIGAME_UPDATE_FREQ = 0.1f;
 
 /**
@@ -29,15 +31,14 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = "Settings")
 	FGameplayTag MinigameTag;
 
+	FMinigameEndEvent OnMinigameEnd;
+
 protected:
 	UFUNCTION()
 	void UpdateMinigame();
 
 	UFUNCTION(BlueprintCallable)
-	void WinMinigame() {}
-
-	UFUNCTION(BlueprintCallable)
-	void LoseMinigame() {}
+	void EndMinigame(EMinigameEndReason Reason);
 
 	UFUNCTION(BlueprintImplementableEvent)
 	void OnSetup();
@@ -47,6 +48,9 @@ protected:
 
 	UFUNCTION(BlueprintImplementableEvent)
 	void OnUpdate();
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void OnEnd(EMinigameEndReason Reason);
 
 	FTimerHandle MinigameTimer;
 

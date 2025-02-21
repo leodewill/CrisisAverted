@@ -9,7 +9,7 @@ UPercentInputBlock::UPercentInputBlock()
 	Percent = 0.f;
 }
 
-void UPercentInputBlock::ResetPercent(float InValue)
+void UPercentInputBlock::Setup(float InValue)
 {
 	Percent = InValue;
 }

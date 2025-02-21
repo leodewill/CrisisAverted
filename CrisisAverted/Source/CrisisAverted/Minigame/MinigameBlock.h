@@ -8,6 +8,7 @@
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FMinigameBlockEvent, UMinigameBlock*, Block);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FMinigameFloatEvent, float, Value);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FMinigameBarEvent, float, Value, float, MaxValue);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class CRISISAVERTED_API UMinigameBlock : public UActorComponent
