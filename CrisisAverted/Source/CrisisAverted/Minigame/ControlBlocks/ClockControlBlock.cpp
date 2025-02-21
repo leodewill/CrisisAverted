@@ -28,7 +28,13 @@ void UClockControlBlock::Update(float DeltaSeconds)
 		if (ElapsedTime > Delay)
 		{
 			bIsRunning = false;
+			ElapsedTime = Delay;
+			OnTimeChanged.Broadcast(ElapsedTime, Delay);
 			OnExpired.Broadcast();
+		}
+		else
+		{
+			OnTimeChanged.Broadcast(ElapsedTime, Delay);
 		}
 	}
 }

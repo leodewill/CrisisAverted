@@ -31,6 +31,9 @@ public:
 	virtual void Update(float DeltaSeconds) override;
 
 	UPROPERTY(BlueprintAssignable)
+	FMinigameBarEvent OnTimeChanged;
+
+	UPROPERTY(BlueprintAssignable)
 	FMinigameClockEvent OnExpired;
 
 protected:

@@ -63,12 +63,14 @@ void UUnstableOutputBlock::Update(float DeltaSeconds)
 void UUnstableOutputBlock::SetPercent(float NewPercent)
 {
 	Percent = FMath::Clamp(NewPercent, 0.f, 1.f);
+	OnValueChanged.Broadcast(Percent, TargetPercent);
 	Process();
 }
 
 void UUnstableOutputBlock::SetTargetPercent(float NewPercent)
 {
 	TargetPercent = FMath::Clamp(NewPercent, 0.f, 1.f);
+	OnTargetChanged.Broadcast(TargetPercent);
 	Process();
 }
 
@@ -76,7 +78,11 @@ void UUnstableOutputBlock::Process()
 {
 	EUnstableMinigameStatus OldStatus = Status;
 	Status = (Percent < TargetPercent - Tolerance) ? EUnstableMinigameStatus::Low : ((Percent > TargetPercent + Tolerance) ? EUnstableMinigameStatus::High : EUnstableMinigameStatus::Good);
-	OnChanged.Broadcast(Percent, Status, TargetPercent);
+
+	if (Status != OldStatus)
+	{
+		OnStatusChanged.Broadcast(Status, OldStatus);
+	}
 }
 
 void UUnstableOutputBlock::Fail()
