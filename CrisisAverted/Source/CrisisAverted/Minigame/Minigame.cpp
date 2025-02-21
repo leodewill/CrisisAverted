@@ -6,8 +6,6 @@
 AMinigame::AMinigame()
 {
 	PrimaryActorTick.bCanEverTick = false;
-
-	ElapsedTime = 0.f;
 }
 
 void AMinigame::RegisterBlock(UMinigameBlock* Block)
@@ -27,7 +25,6 @@ void AMinigame::StartMinigame()
 	}
 
 	GetWorld()->GetTimerManager().SetTimer(MinigameTimer, this, &AMinigame::UpdateMinigame, MINIGAME_UPDATE_FREQ, true);
-	ElapsedTime = 0.f;
 	OnStart();
 }
 
@@ -38,12 +35,5 @@ void AMinigame::UpdateMinigame()
 		Block->Update(MINIGAME_UPDATE_FREQ);
 	}
 
-	ElapsedTime += MINIGAME_UPDATE_FREQ;
 	OnUpdate();
-
-	if (Duration > 0.f && ElapsedTime >= Duration)
-	{
-		GetWorld()->GetTimerManager().ClearTimer(MinigameTimer);
-		OnExpired();
-	}
 }

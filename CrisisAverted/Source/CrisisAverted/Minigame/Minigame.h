@@ -48,17 +48,7 @@ protected:
 	UFUNCTION(BlueprintImplementableEvent)
 	void OnUpdate();
 
-	UFUNCTION(BlueprintImplementableEvent)
-	void OnExpired();
-	
-	//The minigame's duration. If this is greater than zero, the minigame calls OnExpired when the time is up.
-	UPROPERTY(EditDefaultsOnly, Category = "Settings")
-	float Duration = 0.f;
-
 	FTimerHandle MinigameTimer;
-
-	UPROPERTY(BlueprintReadOnly)
-	float ElapsedTime = 0.f;
 
 private:
 	TArray<UMinigameBlock*> MinigameBlocks;
