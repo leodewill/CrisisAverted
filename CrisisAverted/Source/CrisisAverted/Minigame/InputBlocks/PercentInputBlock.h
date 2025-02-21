@@ -16,7 +16,8 @@ public:
 	// Sets default values for this component's properties
 	UPercentInputBlock();
 
-	virtual void Start() override;
+	UFUNCTION(BlueprintCallable)
+	virtual void ResetPercent(float InValue);
 
 	UFUNCTION(BlueprintCallable)
 	virtual void SetPercent(float NewPercent);
@@ -28,8 +29,5 @@ public:
 	FMinigameFloatEvent OnChanged;
 
 protected:
-	UPROPERTY(EditDefaultsOnly, Category = "Settings", meta = (ClampMin = "0.0", ClampMax = "1.0", UIMin = "0.0", UIMax = "1.0"))
-	float StartPercent;
-
 	float Percent;
 };

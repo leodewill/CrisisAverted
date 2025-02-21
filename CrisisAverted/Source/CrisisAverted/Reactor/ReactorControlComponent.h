@@ -20,8 +20,6 @@ public:
 	virtual void InitializeComponent() override;
 
 protected:
-	virtual void Reset() {}
-
 	UFUNCTION()
 	virtual void BindActions(UEnhancedInputComponent* InputComponent) {}
 

@@ -40,6 +40,9 @@ protected:
 	void LoseMinigame() {}
 
 	UFUNCTION(BlueprintImplementableEvent)
+	void OnSetup();
+
+	UFUNCTION(BlueprintImplementableEvent)
 	void OnStart();
 
 	UFUNCTION(BlueprintImplementableEvent)

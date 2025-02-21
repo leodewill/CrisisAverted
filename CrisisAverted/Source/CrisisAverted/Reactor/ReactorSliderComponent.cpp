@@ -3,11 +3,11 @@
 
 #include "ReactorSliderComponent.h"
 
-void UReactorSliderComponent::Reset()
+void UReactorSliderComponent::SetPercent(float InValue)
 {
-	InputDirection = 0.f;
-	InputPercent = 0.f;
-	OutputPercent = 0.f;
+	InputDirection = InValue;
+	InputPercent = InValue;
+	OutputPercent = InValue;
 	OnReset.Broadcast(InputPercent, OutputPercent);
 }
 

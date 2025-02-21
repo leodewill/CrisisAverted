@@ -16,10 +16,15 @@ UUnstableOutputBlock::UUnstableOutputBlock()
 	bFailed = false;
 }
 
+void UUnstableOutputBlock::ResetPercent(float InValue)
+{
+	TargetPercent = InValue;
+	Percent = TargetPercent;
+	Status = EUnstableMinigameStatus::Good;
+}
+
 void UUnstableOutputBlock::Start()
 {
-	Status = EUnstableMinigameStatus::Good;
-	Percent = TargetPercent;
 	UnstableTime = 0.f;
 	bFailed = false;
 }

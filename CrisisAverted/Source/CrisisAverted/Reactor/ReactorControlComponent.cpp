@@ -12,7 +12,6 @@ UReactorControlComponent::UReactorControlComponent()
 
 void UReactorControlComponent::InitializeComponent()
 {
-	Reset();
 	if (InteractionComponent = GetOwner()->GetComponentByClass<UInputInteractionComponent>(); IsValid(InteractionComponent))
 	{
 		InteractionComponent->OnBindActions.AddDynamic(this, &UReactorControlComponent::BindActions);

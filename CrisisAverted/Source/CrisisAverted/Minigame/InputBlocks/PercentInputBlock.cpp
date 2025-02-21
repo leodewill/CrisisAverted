@@ -6,13 +6,12 @@
 UPercentInputBlock::UPercentInputBlock()
 {
 	PrimaryComponentTick.bCanEverTick = false;
-	StartPercent = 0.f;
 	Percent = 0.f;
 }
 
-void UPercentInputBlock::Start()
+void UPercentInputBlock::ResetPercent(float InValue)
 {
-	Percent = StartPercent;
+	Percent = InValue;
 }
 
 void UPercentInputBlock::SetPercent(float NewPercent)

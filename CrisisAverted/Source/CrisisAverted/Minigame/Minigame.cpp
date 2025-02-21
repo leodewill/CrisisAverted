@@ -20,6 +20,7 @@ void AMinigame::RegisterBlock(UMinigameBlock* Block)
 
 void AMinigame::StartMinigame()
 {
+	OnSetup();
 	for (UMinigameBlock* Block : MinigameBlocks)
 	{
 		Block->Start();

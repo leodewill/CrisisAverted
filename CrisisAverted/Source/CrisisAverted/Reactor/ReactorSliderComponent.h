@@ -19,6 +19,9 @@ class CRISISAVERTED_API UReactorSliderComponent : public UReactorControlComponen
 	GENERATED_BODY()
 
 public:
+	UFUNCTION(BlueprintCallable)
+	void SetPercent(float InValue);
+
 	UPROPERTY(BlueprintAssignable)
 	FSliderStateEvent OnReset;
 
@@ -29,8 +32,6 @@ public:
 	FSliderPercentChangedEvent OnOutputChanged;
 	
 protected:
-	virtual void Reset() override;
-
 	virtual void BindActions(UEnhancedInputComponent* InputComponent) override;
 
 	virtual void Update() override;

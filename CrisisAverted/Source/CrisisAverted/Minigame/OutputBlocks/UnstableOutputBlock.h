@@ -18,6 +18,9 @@ class CRISISAVERTED_API UUnstableOutputBlock : public UMinigameBlock
 public:	
 	UUnstableOutputBlock();
 
+	UFUNCTION(BlueprintCallable)
+	virtual void ResetPercent(float InValue);
+
 	virtual void Start() override;
 
 	virtual void Update(float DeltaSeconds) override;
@@ -36,9 +39,6 @@ public:
 
 protected:
 	void Fail();
-
-	UPROPERTY(EditDefaultsOnly, Category = "Settings", meta = (ClampMin = "0.0", ClampMax = "1.0", UIMin = "0.0", UIMax = "1.0"))
-	float StartPercent;
 
 	float Percent;
 
