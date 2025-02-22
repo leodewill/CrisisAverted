@@ -20,6 +20,9 @@ public:
 	UClockControlBlock();
 
 	UFUNCTION(BlueprintCallable)
+	void Setup(float InDelay, float InVariation);
+
+	UFUNCTION(BlueprintCallable)
 	void StartTimer();
 
 	UFUNCTION(BlueprintCallable)
@@ -44,6 +47,8 @@ protected:
 	float DelayVariation;
 
 private:
+	void CalculateDelay();
+
 	float Delay;
 
 	float ElapsedTime;

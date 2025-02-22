@@ -13,10 +13,17 @@ UClockControlBlock::UClockControlBlock()
 	bIsRunning = false;
 }
 
+void UClockControlBlock::Setup(float InDelay, float InVariation)
+{
+	BaseDelay = InDelay;
+	DelayVariation = InVariation;
+	CalculateDelay();
+}
+
 void UClockControlBlock::StartTimer()
 {
 	ElapsedTime = 0.f;
-	Delay = BaseDelay + DelayVariation * FMath::RandRange(-1.f, 1.f);
+	CalculateDelay();
 	bIsRunning = true;
 }
 
@@ -37,4 +44,9 @@ void UClockControlBlock::Update(float DeltaSeconds)
 			OnTimeChanged.Broadcast(ElapsedTime, Delay);
 		}
 	}
+}
+
+void UClockControlBlock::CalculateDelay()
+{
+	Delay = BaseDelay + DelayVariation * FMath::RandRange(-1.f, 1.f);
 }

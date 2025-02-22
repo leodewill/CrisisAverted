@@ -8,6 +8,11 @@ UReactorValveComponent::UReactorValveComponent()
 	ValveSpeed = 0.1f;
 }
 
+void UReactorValveComponent::Setup(float InSpeed)
+{
+	ValveSpeed = InSpeed;
+}
+
 void UReactorValveComponent::BindActions(UEnhancedInputComponent* InputComponent)
 {
 	InputComponent->BindAction(ValveAction, ETriggerEvent::Triggered, this, &UReactorValveComponent::OpenValve);

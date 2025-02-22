@@ -20,6 +20,9 @@ class CRISISAVERTED_API UReactorValveComponent : public UReactorControlComponent
 public:
 	UReactorValveComponent();
 
+	UFUNCTION(BlueprintCallable)
+	void Setup(float InSpeed);
+
 	UPROPERTY(BlueprintAssignable)
 	FValveEvent OnOpen;
 
