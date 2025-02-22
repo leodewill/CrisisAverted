@@ -8,7 +8,7 @@
 #include "../MinigameImportantTypes.h"
 #include "UnstableOutputBlock.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FUnstableFloatEvent, float, Value, EUnstableMinigameStatus, Status, float, TargetValue);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FUnstableFloatEvent, float, Value, float, TargetValue);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FUnstableStatusEvent, EUnstableMinigameStatus, Status, EUnstableMinigameStatus, OldStatus);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
@@ -39,7 +39,7 @@ public:
 	float GetTargetPercent() const { return TargetPercent; }
 
 	UPROPERTY(BlueprintAssignable)
-	FMinigameBarEvent OnValueChanged;
+	FUnstableFloatEvent OnValueChanged;
 
 	UPROPERTY(BlueprintAssignable)
 	FUnstableStatusEvent OnStatusChanged;
