@@ -20,3 +20,9 @@ void UPercentInputBlock::SetPercent(float NewPercent)
 	OnChanged.Broadcast(Percent);
 }
 
+float UPercentInputBlock::GetPreviousPercent(FGameplayTag MemoryID, bool& bOutIsValid)
+{
+	bOutIsValid = PercentMemory.Contains(MemoryID);
+	return bOutIsValid ? PercentMemory.Contains(MemoryID) : 0.f;
+}
+
