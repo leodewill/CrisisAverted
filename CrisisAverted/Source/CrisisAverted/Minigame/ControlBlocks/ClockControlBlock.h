@@ -20,7 +20,7 @@ public:
 	UClockControlBlock();
 
 	UFUNCTION(BlueprintCallable)
-	void Setup(float InDelay, float InVariation);
+	void Setup(float InDelay, float InVariation, float InSpeed = 1.f, float InRewindSpeed = 1.f);
 
 	UFUNCTION(BlueprintCallable)
 	void StartTimer();
@@ -29,7 +29,10 @@ public:
 	void PauseTimer() { bIsRunning = false; }
 
 	UFUNCTION(BlueprintCallable)
-	void ResumeTimer() { bIsRunning = true; }
+	void ResumeTimer();
+
+	UFUNCTION(BlueprintCallable)
+	void ReverseTimer();
 
 	virtual void Update(float DeltaSeconds) override;
 
@@ -53,5 +56,11 @@ private:
 
 	float ElapsedTime;
 
+	float Speed;
+
+	float ReverseSpeed;
+
 	bool bIsRunning;
+
+	bool bIsReversed;
 };

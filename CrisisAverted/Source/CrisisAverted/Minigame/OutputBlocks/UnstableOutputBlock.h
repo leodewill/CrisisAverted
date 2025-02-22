@@ -22,10 +22,6 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void Setup(float InPercent, float InThreshold);
 
-	virtual void Start() override;
-
-	virtual void Update(float DeltaSeconds) override;
-
 	UFUNCTION(BlueprintCallable)
 	void SetPercent(float NewPercent);
 
@@ -47,16 +43,8 @@ public:
 	UPROPERTY(BlueprintAssignable)
 	FMinigameFloatEvent OnTargetChanged;
 
-	UPROPERTY(BlueprintAssignable)
-	FMinigameBarEvent OnTimeChanged;
-
-	UPROPERTY(BlueprintAssignable)
-	FMinigameBlockEvent OnFailed;
-
 protected:
 	void Process();
-
-	void Fail();
 
 	UPROPERTY(EditDefaultsOnly)
 	float TargetPercent;
@@ -64,20 +52,8 @@ protected:
 	UPROPERTY(EditDefaultsOnly)
 	float Tolerance;
 
-	// The accumulated unstable time that the output takes to fail
-	UPROPERTY(EditDefaultsOnly)
-	float FailThreshold;
-
-	// The proportional speed that the unstable time is reduced when the percent is within good range
-	UPROPERTY(EditDefaultsOnly)
-	float RecoverySpeed;
-
 private:
 	float Percent;
 
 	EUnstableMinigameStatus Status;
-
-	float UnstableTime;
-
-	bool bFailed;
 };
